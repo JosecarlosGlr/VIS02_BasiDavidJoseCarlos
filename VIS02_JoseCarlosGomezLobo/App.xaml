@@ -1,0 +1,20 @@
+﻿<Application x:Class="SupervisorUltimate.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="NaveWin.xaml">
+    <Application.Resources>
+
+        <!-- COLORES MODO NORMAL (Claro) -->
+        <SolidColorBrush x:Key="FondoNormal" Color="#F0F0F0" />
+        <SolidColorBrush x:Key="TextoNormal" Color="#000000" />
+
+        <!-- COLORES MODO NOCHE (Oscuro) -->
+        <SolidColorBrush x:Key="FondoNoche" Color="#222222" />
+        <SolidColorBrush x:Key="TextoNoche" Color="#FFFFFF" />
+
+        <!-- COLORES ACTUALES DE LA APP (Por defecto arranca en Normal) -->
+        <SolidColorBrush x:Key="FondoActual" Color="{Binding Source={StaticResource FondoNormal}, Path=Color}" />
+        <SolidColorBrush x:Key="TextoActual" Color="{Binding Source={StaticResource TextoNormal}, Path=Color}" />
+
+    </Application.Resources>
+</Application>
