@@ -1,12 +1,49 @@
 ﻿<Window x:Class="UltimateSupervisor.DetailWin"
+
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:UltimateSupervisor"
-        mc:Ignorable="d"
-        Title="DetailWin" Height="450" Width="800">
-    <Grid>
+
+        xmlns:md="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui.isjon"
+
+        Title="DetailWin" Height="450" Width="800"
+
+        Closing="Window_Closing">
+
+
+
+    <Window.Resources>
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/StylesMedia.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid x:Name="gridDetalle" Background="{Binding Source={StaticResource NormalBackgroundBrush}}">
+        <Grid.RowDefinitions>
+            
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            
+        </Grid.RowDefinitions>
+
+        <!-- Contenedor Dinámico para el contenido (Imagen, Media, TextBox, Markdown) -->
+
+        <ContentControl x:Name="contentControlDetalle" Grid.Row="0" Margin="10"/>
+
+        <!-- Panel de Botones -->
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+
+            <Button x:Name="btnAccion1" Content="Zoom+/Play" Click="BtnAccion1_Click" Style="{StaticResource ControlButtonStyle}" Visibility="Collapsed"/>
+            <Button x:Name="btnAccion2" Content="Zoom-/Pause" Click="BtnAccion2_Click" Style="{StaticResource ControlButtonStyle}" Visibility="Collapsed"/>
+            <Button Content="Cerrar" IsCancel="True" Style="{StaticResource ControlButtonStyle}"/>
+           
+        </StackPanel>
         
     </Grid>
+
 </Window>
