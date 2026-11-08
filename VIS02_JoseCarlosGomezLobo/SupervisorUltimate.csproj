@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ColorCode.Core" Version="2.0.15" />
     <PackageReference Include="WPF-UI.Markdown" Version="4.3.0" />
   </ItemGroup>
 
