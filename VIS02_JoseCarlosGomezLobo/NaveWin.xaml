@@ -1,12 +1,26 @@
-﻿<Window x:Class="VIS02_JoseCarlosGomezLobo.MainWindow"
+﻿<Window x:Class="VIS02_JoseCarlosGomezLobo.NaveWin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:VIS02_JoseCarlosGomezLobo"
+        xmlns:local="clr-namespace:SupervisorUltimate"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="DetailWin" Height="450" Width="800">
+    <Grid Margin="10">
+        <!-- Defino dos filas: una pequeña arriba y otra que ocupe el resto -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
+        <!-- Fila 1: Barra superior de controles -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <Button x:Name="btnCambiarCarpeta" Content="Seleccionar otra carpeta..." Padding="10,5" Click="btnCambiarCarpeta_Click"/>
+            <TextBlock x:Name="txtRutaActual" VerticalAlignment="Center" Margin="10,0,0,0" FontWeight="Bold"/>
+        </StackPanel>
+
+        <!-- Fila 2: El árbol de archivos -->
+        <TreeView x:Name="treeArchivos" Grid.Row="1" SelectedItemChanged="treeArchivos_SelectedItemChanged">
+        </TreeView>
     </Grid>
 </Window>
