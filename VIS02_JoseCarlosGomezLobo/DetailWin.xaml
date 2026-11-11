@@ -2,58 +2,92 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Detalle del Archivo" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
         Closing="Window_Closing">
 
-	<Grid x:Name="gridDetalle" Margin="10">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
 
-		<Grid Grid.Row="0" Margin="10" ClipToBounds="True">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="VisorResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
 
-			<!-- Visor para Imagen con Zoom -->
-			<Image x:Name="VisorImagen" Visibility="Collapsed">
-				<Image.RenderTransform>
-					<ScaleTransform x:Name="TransformacionZoom" ScaleX="1" ScaleY="1" />
-				</Image.RenderTransform>
-			</Image>
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextoActual}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource TextoActual}"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="15,6"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" 
+                                    BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                    CornerRadius="4">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#1A888888"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
 
-			<!-- Visor de Video/Audio -->
-			<MediaElement x:Name="VisorMedia" Visibility="Collapsed"
+
+    <Grid x:Name="gridDetalle" Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0" Margin="10" ClipToBounds="True">
+
+           
+            <Image x:Name="VisorImagen" Visibility="Collapsed" Style="{StaticResource EstiloVisorImagen}">
+                <Image.RenderTransform>
+                    <ScaleTransform x:Name="TransformacionZoom" ScaleX="1" ScaleY="1" />
+                </Image.RenderTransform>
+            </Image>
+
+            <MediaElement x:Name="VisorMedia" Visibility="Collapsed" Style="{StaticResource EstiloVisorMedia}"
                           LoadedBehavior="Manual" UnloadedBehavior="Stop"/>
 
-			<!-- Visor de Texto Plano (.txt) -->
-			<TextBox x:Name="VisorTexto" Visibility="Collapsed"
-                     IsReadOnly="True" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap"/>
 
-			<!-- Visor para Markdown (.md) usando TextBox nativo -->
-			<TextBox x:Name="VisorMarkdown" Visibility="Collapsed"
-                     IsReadOnly="True" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" TextWrapping="Wrap"
-                     FontFamily="Consolas"/>
+            <TextBox x:Name="VisorTexto" Visibility="Collapsed" Style="{StaticResource EstiloVisorTexto}"/>
 
-		</Grid>
+            <TextBox x:Name="VisorMarkdown" Visibility="Collapsed" Style="{StaticResource EstiloVisorTexto}"/>
 
-		<!-- BOTONES -->
-		<Grid Grid.Row="1" Margin="10,10,10,0">
+        </Grid>
 
-			<StackPanel x:Name="PanelBotonesImagen" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed">
-				<Button Content="Zoom +" Click="BtnZoomIn_Click" Margin="5" Padding="5"/>
-				<Button Content="Zoom -" Click="BtnZoomOut_Click" Margin="5" Padding="5"/>
-			</StackPanel>
+        <Grid Grid.Row="1" Margin="10,15,10,0">
 
-			<StackPanel x:Name="PanelBotonesMedia" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed">
-				<Button Content="Play" Click="BtnPlay_Click" Margin="5" Padding="5"/>
-				<Button Content="Pause" Click="BtnPause_Click" Margin="5" Padding="5"/>
-			</StackPanel>
+            <StackPanel x:Name="PanelBotonesImagen" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed">
+                <Button Content="Zoom +" Click="BtnZoomIn_Click"/>
+                <Button Content="Zoom -" Click="BtnZoomOut_Click"/>
+            </StackPanel>
 
-			<StackPanel x:Name="PanelBotonesTexto" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed">
-				<Button Content="Fuente +" Click="BtnFontUp_Click" Margin="5" Padding="5"/>
-				<Button Content="Fuente -" Click="BtnFontDown_Click" Margin="5" Padding="5"/>
-			</StackPanel>
+            <StackPanel x:Name="PanelBotonesMedia" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed">
+                <Button Content="Play" Click="BtnPlay_Click"/>
+                <Button Content="Pause" Click="BtnPause_Click"/>
+            </StackPanel>
 
-			<!-- Botón de cerrar -->
-			<Button Content="Cerrar" IsCancel="True" HorizontalAlignment="Right" Click="BtnCerrar_Click" Margin="5" Padding="10,5"/>
-		</Grid>
-	</Grid>
+            <StackPanel x:Name="PanelBotonesTexto" Orientation="Horizontal" HorizontalAlignment="Left" Visibility="Collapsed">
+                <Button Content="Fuente +" Click="BtnFontUp_Click"/>
+                <Button Content="Fuente -" Click="BtnFontDown_Click"/>
+            </StackPanel>
+
+            <Button Content="Cerrar Visor" IsCancel="True" HorizontalAlignment="Right" Click="BtnCerrar_Click" FontWeight="SemiBold"/>
+
+        </Grid>
+    </Grid>
 </Window>
