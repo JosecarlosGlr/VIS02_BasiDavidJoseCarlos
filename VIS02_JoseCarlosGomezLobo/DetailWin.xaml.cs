@@ -24,9 +24,11 @@ namespace UltimateSupervisor
             VisorMedia.Visibility = Visibility.Collapsed;
             VisorTexto.Visibility = Visibility.Collapsed;
             VisorMarkdown.Visibility = Visibility.Collapsed;
+            VisorMarkdownScroll.Visibility = Visibility.Collapsed;
             PanelBotonesImagen.Visibility = Visibility.Collapsed;
             PanelBotonesMedia.Visibility = Visibility.Collapsed;
             PanelBotonesTexto.Visibility = Visibility.Collapsed;
+          
 
             // Mostrar el visor que corresponda según la extensión
             switch (extension)
@@ -58,9 +60,9 @@ namespace UltimateSupervisor
                     break;
 
                 case ".md":
-                    VisorMarkdown.Text = File.ReadAllText(ruta);
+                    VisorMarkdown.Markdown = File.ReadAllText(ruta);
                     VisorMarkdown.Visibility = Visibility.Visible;
-                    PanelBotonesTexto.Visibility = Visibility.Visible;
+                    VisorMarkdownScroll.Visibility = Visibility.Visible;
                     break;
 
                 default:
@@ -92,20 +94,14 @@ namespace UltimateSupervisor
         // --- CONTROLES DE TEXTO Y MARKDOWN ---
         private void BtnFontUp_Click(object sender, RoutedEventArgs e)
         {
-            if (VisorTexto.Visibility == Visibility.Visible)
-                VisorTexto.FontSize += 2;
-            else if (VisorMarkdown.Visibility == Visibility.Visible)
-                VisorMarkdown.FontSize += 2;
+            VisorTexto.FontSize += 2;
         }
 
         private void BtnFontDown_Click(object sender, RoutedEventArgs e)
         {
-            if (VisorTexto.Visibility == Visibility.Visible && VisorTexto.FontSize > 8)
+            if (VisorTexto.FontSize > 8)
                 VisorTexto.FontSize -= 2;
-            else if (VisorMarkdown.Visibility == Visibility.Visible && VisorMarkdown.FontSize > 8)
-                VisorMarkdown.FontSize -= 2;
         }
-
         // --- CERRAR VENTANA ---
         private void BtnCerrar_Click(object sender, RoutedEventArgs e)
         {
