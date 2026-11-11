@@ -5,22 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SupervisorUltimate"
         mc:Ignorable="d"
-        Title="DetailWin" Height="450" Width="800">
-    <Grid Margin="10">
-        <!-- Defino dos filas: una pequeña arriba y otra que ocupe el resto -->
+        Title="HiperGaleria - Navegador" Height="500" Width="800"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#0078D4"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#005A9E"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+  
+    <Grid Margin="15">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Fila 1: Barra superior de controles -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
-            <Button x:Name="btnCambiarCarpeta" Content="Seleccionar otra carpeta..." Padding="10,5" Click="btnCambiarCarpeta_Click"/>
-            <TextBlock x:Name="txtRutaActual" VerticalAlignment="Center" Margin="10,0,0,0" FontWeight="Bold"/>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
+            <Button x:Name="btnCambiarCarpeta" Content="Seleccionar otra carpeta..." Click="btnCambiarCarpeta_Click"/>
+            <TextBlock x:Name="txtRutaActual" VerticalAlignment="Center" Margin="15,0,0,0" FontWeight="SemiBold" FontSize="14"/>
         </StackPanel>
 
-        <!-- Fila 2: El árbol de archivos -->
-        <TreeView x:Name="treeArchivos" Grid.Row="1" SelectedItemChanged="treeArchivos_SelectedItemChanged">
-        </TreeView>
+        <TreeView x:Name="treeArchivos" Grid.Row="1" SelectedItemChanged="treeArchivos_SelectedItemChanged"
+                  BorderBrush="#cccccc" BorderThickness="1" Padding="5"/>
     </Grid>
 </Window>
