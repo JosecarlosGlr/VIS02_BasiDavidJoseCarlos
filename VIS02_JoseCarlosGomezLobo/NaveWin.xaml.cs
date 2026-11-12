@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using UltimateSupervisor;
+using WpfApplication = System.Windows.Application;
 
 namespace VIS02_JoseCarlosGomezLobo
 {
@@ -104,6 +105,28 @@ namespace VIS02_JoseCarlosGomezLobo
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show("No se pudo leer la carpeta: " + ex.Message);
+            }
+        }
+        private bool modoNoche = false;
+
+        // Evento del botón para cambiar el tema
+        private void btnModoOscuro_Click(object sender, RoutedEventArgs e)
+        {
+            modoNoche = !modoNoche;
+
+            if (modoNoche)
+            {
+                // Cambiar a Noche
+                WpfApplication.Current.Resources["FondoActual"] = WpfApplication.Current.Resources["FondoNoche"];
+                WpfApplication.Current.Resources["TextoActual"] = WpfApplication.Current.Resources["TextoNoche"];
+                btnModoOscuro.Content = "☀️ Modo Normal";
+            }
+            else
+            {
+                // Volver a Normal
+                WpfApplication.Current.Resources["FondoActual"] = WpfApplication.Current.Resources["FondoNormal"];
+                WpfApplication.Current.Resources["TextoActual"] = WpfApplication.Current.Resources["TextoNormal"];
+                btnModoOscuro.Content = "🌙 Modo Noche";
             }
         }
     }
