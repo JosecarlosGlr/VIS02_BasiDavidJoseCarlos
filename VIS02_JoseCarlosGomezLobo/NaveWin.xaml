@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SupervisorUltimate"
         mc:Ignorable="d"
         Title="HiperGaleria - Navegador" Height="500" Width="800"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource FondoActual}"
+        Foreground="{DynamicResource TextoActual}">
 
     <Window.Resources>
         <Style TargetType="Button">
@@ -18,6 +19,7 @@
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
+             
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" CornerRadius="4">
@@ -43,9 +45,11 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
             <Button x:Name="btnCambiarCarpeta" Content="Seleccionar otra carpeta..." Click="btnCambiarCarpeta_Click"/>
             <TextBlock x:Name="txtRutaActual" VerticalAlignment="Center" Margin="15,0,0,0" FontWeight="SemiBold" FontSize="14"/>
+            <Button x:Name="btnModoOscuro" Content="🌙 Modo Noche" Click="btnModoOscuro_Click" Margin="15,0,0,0"/>
         </StackPanel>
 
         <TreeView x:Name="treeArchivos" Grid.Row="1" SelectedItemChanged="treeArchivos_SelectedItemChanged"
-                  BorderBrush="#cccccc" BorderThickness="1" Padding="5"/>
+                  BorderBrush="{DynamicResource TextoActual}" BorderThickness="1" Padding="5"
+                  Background="Transparent" Foreground="{DynamicResource TextoActual}"/>
     </Grid>
 </Window>

@@ -1,20 +1,34 @@
-﻿<Application x:Class="SupervisorUltimate.App"
+﻿<Application x:Class="VIS02_JoseCarlosGomezLobo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="NaveWin.xaml">
     <Application.Resources>
 
-        <!-- COLORES MODO NORMAL (Claro) -->
-        <SolidColorBrush x:Key="FondoNormal" Color="#F0F0F0" />
-        <SolidColorBrush x:Key="TextoNormal" Color="#000000" />
+        <!-- 1. DEFINIMOS LAS PALETAS DE COLORES -->
+        <SolidColorBrush x:Key="FondoNormal" Color="#F3F3F3"/>
+        <SolidColorBrush x:Key="TextoNormal" Color="#111111"/>
 
-        <!-- COLORES MODO NOCHE (Oscuro) -->
-        <SolidColorBrush x:Key="FondoNoche" Color="#222222" />
-        <SolidColorBrush x:Key="TextoNoche" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="FondoNoche" Color="#222222"/>
+        <SolidColorBrush x:Key="TextoNoche" Color="#EEEEEE"/>
 
-        <!-- COLORES ACTUALES DE LA APP (Por defecto arranca en Normal) -->
-        <SolidColorBrush x:Key="FondoActual" Color="{Binding Source={StaticResource FondoNormal}, Path=Color}" />
-        <SolidColorBrush x:Key="TextoActual" Color="{Binding Source={StaticResource TextoNormal}, Path=Color}" />
+        <!-- La variable que irá cambiando  -->
+        <SolidColorBrush x:Key="FondoActual" Color="#F3F3F3"/>
+        <SolidColorBrush x:Key="TextoActual" Color="#111111"/>
+
+        <!-- 2. APLICAMOS EL COLOR GLOBALMENTE  -->
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="{DynamicResource FondoActual}"/>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource FondoActual}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextoActual}"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="{DynamicResource TextoActual}"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource TextoActual}"/>
+        </Style>
 
     </Application.Resources>
 </Application>
